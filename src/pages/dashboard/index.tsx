@@ -132,12 +132,12 @@ export function Dashboard(): JSX.Element {
   );
 
   return (
-    <main className="min-h-screen bg-gray-50 p-2">
+    <main className="min-h-screen p-2">
       <div className="max-w-16xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">Dashboard</h2>
-          <p className="text-gray-600 mt-2">
+          <h2 className="text-3xl font-bold">Dashboard</h2>
+          <p className="mt-2">
             Visão geral dos tickets do service desk
           </p>
         </div>

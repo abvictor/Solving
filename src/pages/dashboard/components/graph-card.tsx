@@ -13,8 +13,8 @@ export function StatsCard({ title, value, icon: Icon, trend }: CardProps) {
     <Card className="p-6">
     <div className="flex items-center justify-between">
       <div>
-        <p className="text-sm font-medium text-gray-600">{title}</p>
-        <p className="text-3xl font-bold text-gray-900 mt-2">{value}</p>
+        <p className="text-sm font-medium">{title}</p>
+        <p className="text-3xl font-bold  mt-2">{value}</p>
         {trend && (
           <p className="text-sm text-green-600 mt-2 flex items-center">
             <TrendingUpDown className="w-4 h-4 mr-1" />
