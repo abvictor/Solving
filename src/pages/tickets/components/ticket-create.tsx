@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import { Button } from "./ui/button";
+import { Button } from "../../../components/ui/button";
 import {
   DialogClose,
   DialogContent,
@@ -8,29 +8,33 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./ui/dialog";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+} from "../../../components/ui/dialog";
+import { Input } from "../../../components/ui/input";
+import { Label } from "../../../components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { Textarea } from "./ui/textarea";
+} from "../../../components/ui/select";
+import { Textarea } from "../../../components/ui/textarea";
 import { Controller, useForm } from "react-hook-form";
-import { registerTicket } from "../api/register-ticket";
+import { registerTicket } from "../../../api/register-ticket";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
-import { getProductModules, type Module } from "../api/get-product-modules";
-import { getUserProducts, type Product } from "../api/get-user-products";
-import { getCustomers, type Customer } from "../api/get-customers";
+import { getProductModules, type Module } from "../../../api/get-product-modules";
+import { getUserProducts, type Product } from "../../../api/get-user-products";
+import { getCustomers, type Customer } from "../../../api/get-customers";
+
 
 const ticketSchema = z.object({
-  title: z.string().min(10, "Título deve ter no mínimo 10 caracteres"),
-  description: z.string().min(10, "Descrição deve ter no mínimo 10 caracteres"),
+  title: z.string().trim().min(10, "Título deve ter no mínimo 10 caracteres"),
+  description: z
+    .string()
+    .trim()
+    .min(10, "Descrição deve ter no mínimo 10 caracteres"),
   priority: z.string().min(1, "Selecione uma prioridade"),
   product_id: z.string().min(1, "Selecione um produto"),
   customer_id: z.string().min(1, "Selecione um cliente"),
@@ -232,7 +236,6 @@ export function TicketCreate() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label>Prioridade</Label>
             <Controller
               name="priority"
               control={control}

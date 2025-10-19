@@ -11,8 +11,6 @@ export async function signIn({ email, password }: SignInBody){
         email,
         password,
       });       
-
-      console.log(response)
     }catch(error: unknown){
         throw error;
     }

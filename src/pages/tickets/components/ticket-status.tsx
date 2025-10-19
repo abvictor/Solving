@@ -14,24 +14,27 @@ export function TicketStatus({ status }: TicketStatusProps) {
   return (
     <div className="flex items-center gap-2">
       {status === "OPEN" && (
-        <span className="w-[95px] p-3 h-4 rounded-sm bg-red-300 flex items-center justify-center text-center">
-          <p className="font-medium text-muted-foreground text-red-600">
+        <span className="w-[110px] gap-1 p-3 h-4 rounded-sm bg-red-400 flex items-center justify-evenly text-center">
+          <span className="w-2 h-2 bg-white rounded-lg"></span>
+          <p className="font-medium text-muted-foreground text-white">
             {ticketStatus[status]}
           </p>
         </span>
       )}
 
       {status === "CLOSED" && (
-        <span className="w-[95px] p-3 h-4 rounded-sm bg-green-400 flex items-center justify-center text-center">
-          <p className="font-medium text-muted-foreground text-green-600">
+        <span className="w-[110px] gap-1 p-3 h-4 rounded-sm bg-green-400 flex items-center justify-evenly text-center">
+          <span className="w-2 h-2 bg-white rounded-lg"></span>
+          <p className="font-medium text-muted-foreground text-white">
             {ticketStatus[status]}
           </p>
         </span>
       )}
 
       {status === "IN_PROGRESS" && (
-        <span className="w-[95px] p-3 h-4 rounded-sm bg-yellow-400 flex items-center justify-center text-center">
-          <p className="font-medium text-muted-foreground text-yellow-100">
+        <span className="w-[110px] gap-1 p-3 h-4 rounded-sm bg-blue-400 flex items-center justify-evenly text-center">
+          <span className="w-2 h-2 bg-white rounded-lg"></span>
+          <p className="font-medium text-muted-foreground text-white">
             {ticketStatus[status]}
           </p>
         </span>

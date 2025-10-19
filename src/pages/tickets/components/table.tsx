@@ -44,12 +44,12 @@ interface TicketsTableProps {
   data?: Ticket[];
 }
 
-export function TicketsTable({ data, columns }: TicketsTableProps) {
-  const noContentMessage = data?.length === 0 ? "Sem chamados registrados." : null;
+export function TicketsTable({ data = [], columns }: TicketsTableProps) {
+  const hasNoTickets = data.length === 0;
   
   return (
     <Table>
-      {noContentMessage && <TableCaption>{noContentMessage}</TableCaption>}
+      {hasNoTickets && <TableCaption>Sem chamados registrados.</TableCaption>}
       <TableHeader>
         <TableRow>
           {columns.map((column) => (
@@ -58,7 +58,7 @@ export function TicketsTable({ data, columns }: TicketsTableProps) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data?.map((ticket) => (
+        {data.map((ticket) => (
           <TableRow key={ticket.id}>
             <TableCell>{ticket.id}</TableCell>
             <TableCell>{ticket.title}</TableCell>
@@ -73,7 +73,7 @@ export function TicketsTable({ data, columns }: TicketsTableProps) {
               {new Date(ticket.created_at).toLocaleDateString("pt-BR")}
             </TableCell>
             <TableCell>
-              <DropdownMenuOptions id={ticket.id} status={ticket.status}/>
+              <DropdownMenuOptions id={ticket.id} status={ticket.status} />
             </TableCell>
           </TableRow>
         ))}
