@@ -32,7 +32,7 @@ export function Tickets() {
   const [ticketId, setTicketId] = useState<string>("");
 
   const { data: tickets = [], isLoading } = useQuery({
-    queryKey: ["tickets", currentPage, ticketsPerPage, customerName, ticketId],
+    queryKey: ["tickets", currentPage, ticketsPerPage, customerName],
     queryFn: () =>
       getTickets({
         page: currentPage,
@@ -83,69 +83,80 @@ export function Tickets() {
           Controle geral dos tickets registrados
         </p>
       </div>
-      <div className="mt-8">
+      <div className="mt-4">
         <form action="">
-          <div className="flex items-center gap-2">
-            <span>Filtros</span>
-            <Input
-              placeholder="Id ticket"
-              className="max-w-[180px]"
-              value={ticketId}
-              onChange={(e) => setTicketId(e.target.value)}
-            />
-            <Input
-              placeholder="Nome do cliente"
-              className="max-w-[250px]"
-              value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-            />
-            <Select
-              value={String(ticketsPerPage)}
-              onValueChange={handleTicketsPerPageChange}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Tickets por página" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="5">5 por página</SelectItem>
-                <SelectItem value="10">10 por página</SelectItem>
-                <SelectItem value="20">20 por página</SelectItem>
-                <SelectItem value="30">30 por página</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="OPEN">Aberto</SelectItem>
-                <SelectItem value="RESOLVED">Resolvido</SelectItem>
-                <SelectItem value="IN_PROGRESS">Em análise</SelectItem>
-              </SelectContent>
-            </Select>
-            <Button
-              className="bg-zinc-400 hover:bg-zinc-500"
-              onClick={() => handleSearchTickets}
-            >
-              <Search />
-              Filtrar resultados
-            </Button>
-            <Button
-              className="bg-red-600 hover:bg-red-500"
-              onClick={handleAlertUser}
-            >
-              <X />
-              Remover filtros
-            </Button>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>
-                  <Plus />
-                  Novo ticket
-                </Button>
-              </DialogTrigger>
-              <TicketCreate />
-            </Dialog>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-lg font-semibold">Filtros</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <Input
+                name="ticketId"
+                placeholder="Id ticket"
+                value={ticketId}
+                onChange={(e) => setTicketId(e.target.value)}
+              />
+
+              <Input
+                name="customerName"
+                placeholder="Nome do cliente"
+                value={customerName}
+                onChange={(e) => setCustomerName(e.target.value)}
+              />
+
+              <Select
+                name="ticketsPerPage"
+                value={String(ticketsPerPage)}
+                onValueChange={handleTicketsPerPageChange}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Tickets por página" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="5">5 por página</SelectItem>
+                  <SelectItem value="10">10 por página</SelectItem>
+                  <SelectItem value="20">20 por página</SelectItem>
+                  <SelectItem value="30">30 por página</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <Select name="ticketStatus">
+                <SelectTrigger>
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="OPEN">Aberto</SelectItem>
+                  <SelectItem value="RESOLVED">Resolvido</SelectItem>
+                  <SelectItem value="IN_PROGRESS">Em análise</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="grid grid-cols-1 gap-2 md:flex">
+              <Button
+                className="w-full md:max-w-[120px] bg-zinc-400 hover:bg-zinc-500"
+                onClick={() => handleSearchTickets}
+              >
+                <Search className="h-4 w-4" />
+                <span>Filtrar</span>
+              </Button>
+
+              <Button
+                className="w-full md:max-w-[120px] bg-red-600 hover:bg-red-500"
+                onClick={handleAlertUser}
+              >
+                <X className="h-4 w-4" />
+                <span>Limpar</span>
+              </Button>
+
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="w-full md:max-w-[120px]">
+                    <Plus className="h-4 w-4" />
+                    Novo ticket
+                  </Button>
+                </DialogTrigger>
+                <TicketCreate />
+              </Dialog>
+            </div>
           </div>
         </form>
       </div>
@@ -156,7 +167,9 @@ export function Tickets() {
             Buscando
           </Badge>
         ) : (
-          <TicketsTable columns={tableColumns} data={tickets.tickets} />
+          <div className="relative w-full overflow-x-auto shadow-sm border rounded-lg">
+            <TicketsTable columns={tableColumns} data={tickets.tickets} />
+          </div>
         )}
       </div>
       <div className="mt-4">

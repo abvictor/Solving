@@ -12,12 +12,12 @@ export function AuthLayout() {
         <span className="font-semibold">Solving</span>
       </div>
 
-      <div className="flex-1 flex justify-center flex-col-reverse md:flex-row antialiased">
-        <div className="flex flex-col justify-center items-center p-6 mt-0 bg-white md:w-1/2 border-t md:border-t-0 md:border-r border-foreground/5 relative">
+      <div className="flex-1 flex justify-center flex-col md:flex-row antialiased">
+        <div className="flex flex-col justify-center items-center mt-0 bg-white md:w-1/2 border-t md:border-t-0 md:border-r border-foreground/5 relative">
           <img
             src={hero}
             alt="Ilustração de suporte"
-            className="mb-12 w-full max-w-xs md:max-w-80 object-contain"
+            className="w-full max-w-[190px] md:max-w-80 object-contain"
           />
         </div>
         <div className="flex flex-col justify-center items-center p-6 md:w-1/2">

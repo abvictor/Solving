@@ -48,22 +48,29 @@ export function TicketsTable({ data = [], columns }: TicketsTableProps) {
   const hasNoTickets = data.length === 0;
   
   return (
-    <Table>
+    <Table className="min-w-[700px]">
       {hasNoTickets && <TableCaption>Sem chamados registrados.</TableCaption>}
       <TableHeader>
         <TableRow>
           {columns.map((column) => (
-            <TableHead key={column}>{column}</TableHead>
+            <TableHead key={column}>
+              {column}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>
       <TableBody>
         {data.map((ticket) => (
-          <TableRow key={ticket.id}>
+          <TableRow
+            key={ticket.id}
+            className="hover:bg-slate-100 text-xs sm:text-sm"
+          >
             <TableCell>{ticket.id}</TableCell>
             <TableCell>{ticket.title}</TableCell>
             <TableCell>{ticket.customer.name}</TableCell>
-            <TableCell>{ticket.registered_by.name}</TableCell>
+            <TableCell>
+              {ticket.registered_by.name}
+            </TableCell>
             <TableCell>{ticket.product.name}</TableCell>
             <TableCell>{ticket.module.name}</TableCell>
             <TableCell>

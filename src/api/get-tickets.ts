@@ -17,6 +17,5 @@ export async function getTickets({
     params: { page, take, ticket_id: ticket_id, customer_name: customer_name },
   });
   
-  console.log(response)
   return response.data;
 }
